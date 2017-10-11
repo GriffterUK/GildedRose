@@ -2,10 +2,10 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class TestAssemblyTests
+    public class TestThatRefactorMatchesGoldenMasterAfter
     {
         [Fact]
-        public void TestTheTruth()
+        public void InitialSetup()
         {
             Assert.True(true);
         }
