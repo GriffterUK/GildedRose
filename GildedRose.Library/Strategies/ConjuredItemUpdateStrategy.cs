@@ -21,6 +21,8 @@ namespace GildedRose.Strategies
                 .IncreaseAge()
                 .DecreaseQuality()
                 .DecreaseQuality()
+                .DecreaseQualityWhenExpired()
+                .DecreaseQualityWhenExpired()
                 .LimitQualityToNoLessThan(0);
         }
     }
