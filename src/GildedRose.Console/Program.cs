@@ -13,7 +13,7 @@ namespace GildedRose.Console
 
             var app = new Program();
 
-            Inventory InnInventory = Inventory.Create();
+            Inventory InnInventory = Inventory.CreateDefault();
 
             System.Console.WriteLine("\n\nBefore\n");
             InnInventory.DisplayItems();

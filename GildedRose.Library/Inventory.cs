@@ -8,24 +8,31 @@ namespace GildedRose
 {
     public class Inventory
     {
-        IList<Item> Items = new List<Item>
-                                          {
-                                              new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                                              new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                                              new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                                              new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                                              new Item
-                                                  {
-                                                      Name = "Backstage passes to a TAFKAL80ETC concert",
-                                                      SellIn = 15,
-                                                      Quality = 20
-                                                  },
-                                              new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-                                          };
-
+        private IList<Item> items = new List<Item>();  
+        public IList<Item> Items {  get { return items;  } }
+            
         public static Inventory Create()
         {
             return new Inventory();
+        }
+
+        public static Inventory CreateDefault()
+        {
+            Inventory inventory = new Inventory();
+
+            inventory.AddItem(ItemBuilder.AnItem().WithName("+5 Dexterity Vest").WithSellIn(10).WithQuality(20).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Aged Brie").WithSellIn(2).WithQuality(0).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Elixir of the Mongoose").WithSellIn(5).WithQuality(7).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Sulfuras, Hand of Ragnaros").WithSellIn(0).WithQuality(80).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Backstage passes to a TAFKAL80ETC concert").WithSellIn(15).WithQuality(20).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Conjured Mana Cake").WithSellIn(3).WithQuality(6).Build());
+
+            return inventory;
+        }
+
+        public void AddItem(Item item)
+        {
+            Items.Add(item);
         }
 
         public void UpdateQuality()
