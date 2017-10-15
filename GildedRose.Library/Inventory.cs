@@ -118,5 +118,22 @@ namespace GildedRose
                 System.Console.WriteLine(ThisItem.ToString());
             }
         }
+
+        public void ReconstructMe()
+        {
+            System.Console.WriteLine("Inventory inventory = new Inventory();");
+            System.Console.WriteLine("");
+
+            foreach (Item ThisItem in Items)
+            {
+                System.Console.WriteLine(String.Format(
+                    "inventory.AddItem(ItemBuilder.AnItem().WithName(\"{0}\").WithSellIn({1}).WithQuality({2}).Build())",
+                    ThisItem.Name, ThisItem.SellIn, ThisItem.Quality));
+            }
+
+            System.Console.WriteLine("");
+            System.Console.WriteLine("");
+
+        }
     }
 }

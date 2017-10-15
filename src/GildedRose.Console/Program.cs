@@ -16,13 +16,13 @@ namespace GildedRose.Console
             Inventory InnInventory = Inventory.CreateDefault();
 
             System.Console.WriteLine("\n\nBefore\n");
-            InnInventory.DisplayItems();
+            InnInventory.ReconstructMe();
 
-            for (int iterations = 0; iterations < 20; iterations++)
+            for (int iterations = 0; iterations < 10; iterations++)
             {
-                System.Console.WriteLine("\n\nAfter (" + iterations + ") iterations\n");
-                InnInventory.UpdateQuality();
-                InnInventory.DisplayItems();
+                System.Console.WriteLine("\n\nAfter (" + (iterations + 1) + ") iterations\n");
+                InnInventory.UpdateQuality();       
+                InnInventory.ReconstructMe();
             }
 
             System.Console.ReadKey();
