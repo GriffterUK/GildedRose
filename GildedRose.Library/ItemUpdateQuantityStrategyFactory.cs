@@ -18,6 +18,10 @@ namespace GildedRose
             {
                 return LegendaryItemUpdateStrategy.Create();
             }
+            else if (itemName.Contains("Backstage passes"))
+            {
+                return BackstagePassesItemUpdateStrategy.Create();
+            }
             else
             {
                 return DefaultItemUpdateStrategy.Create();
@@ -53,8 +57,8 @@ namespace GildedRose
         public void UpdateQuantity(Item item)
         {
             item.SellIn--;
-            item.Quality = item.Quality == 50 ? 50 :
-                           item.Quality + (item.SellIn < 0 ? 2 : 1);
+            item.Quality += (item.SellIn < 0 ? 2 : 1);
+            item.Quality = Math.Min(50, item.Quality);
         }
     }
 
@@ -71,6 +75,32 @@ namespace GildedRose
         {
  
         }
+    }
+
+    class BackstagePassesItemUpdateStrategy : IItemUpdateQuantityStrategy
+    {
+        private BackstagePassesItemUpdateStrategy() { }
+
+        public static IItemUpdateQuantityStrategy Create()
+        {
+            return new BackstagePassesItemUpdateStrategy();
+        }
+
+        public void UpdateQuantity(Item item)
+        {
+            item.SellIn--;
+
+            item.Quality++;
+            item.Quality += item.SellIn < 10 ? 1 : 0;
+            item.Quality += item.SellIn < 5 ? 1 : 0;
+
+            if ( item.SellIn < 0 )
+            {
+                item.Quality = 0;
+            }
+
+            item.Quality = Math.Min(50, item.Quality);
+        }  
     }
 
     class DefaultItemUpdateStrategy : IItemUpdateQuantityStrategy
