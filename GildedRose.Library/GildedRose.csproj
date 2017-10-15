@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ItemModifier.cs" />
+    <Compile Include="Strategies\ConjuredItemUpdateStrategy.cs" />
     <Compile Include="Strategies\IItemUpdateStrategyFactory.cs" />
     <Compile Include="Strategies\ItemUpdateStrategyFactory.cs" />
     <Compile Include="Strategies\BackstagePassesItemUpdateStrategy.cs" />
