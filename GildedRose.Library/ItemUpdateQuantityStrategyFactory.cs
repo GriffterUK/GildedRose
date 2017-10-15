@@ -10,9 +10,13 @@ namespace GildedRose
     {
         public IItemUpdateQuantityStrategy StrategyFor(string itemName)
         {
-            if (itemName == "Aged Brie")
+            if (itemName.Contains("Aged"))
             {
-                return AgedBrieItemUpdateStrategy.Create();
+                return AgedItemUpdateStrategy.Create();
+            }
+            else if (itemName.Contains("Sulfuras")) 
+            {
+                return LegendaryItemUpdateStrategy.Create();
             }
             else
             {
@@ -33,15 +37,17 @@ namespace GildedRose
     //"Aged Brie" actually increases in Quality the older it gets
     //The Quality of an item is never more than 50
     //"Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-    //"Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert
+    //"Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; 
+    //     Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less 
+    //     but Quality drops to 0 after the concert
 
-    class AgedBrieItemUpdateStrategy : IItemUpdateQuantityStrategy
+    class AgedItemUpdateStrategy : IItemUpdateQuantityStrategy
     {
-        private AgedBrieItemUpdateStrategy() { }
+        private AgedItemUpdateStrategy() { }
 
         public static IItemUpdateQuantityStrategy Create()
         {
-            return new AgedBrieItemUpdateStrategy();
+            return new AgedItemUpdateStrategy();
         }
 
         public void UpdateQuantity(Item item)
@@ -49,6 +55,21 @@ namespace GildedRose
             item.SellIn--;
             item.Quality = item.Quality == 50 ? 50 :
                            item.Quality + (item.SellIn < 0 ? 2 : 1);
+        }
+    }
+
+    class LegendaryItemUpdateStrategy : IItemUpdateQuantityStrategy
+    {
+        private LegendaryItemUpdateStrategy() { }
+
+        public static IItemUpdateQuantityStrategy Create()
+        {
+            return new LegendaryItemUpdateStrategy();
+        }
+
+        public void UpdateQuantity(Item item)
+        {
+ 
         }
     }
 
