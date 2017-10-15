@@ -42,12 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ItemModifier.cs" />
-    <Compile Include="ItemUpdateQuantityStrategyFactory.cs" />
-    <Compile Include="IItemUpdateQuantityStrategy.cs" />
+    <Compile Include="Strategies\ItemUpdateStrategyFactory.cs" />
+    <Compile Include="Strategies\BackstagePassesItemUpdateStrategy.cs" />
+    <Compile Include="Strategies\DefaultItemUpdateStrategy.cs" />
+    <Compile Include="Strategies\LegendaryItemUpdateStrategy.cs" />
+    <Compile Include="Strategies\IItemUpdateStrategy.cs" />
     <Compile Include="ItemBuilder.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\AgedItemUpdateQuantityStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

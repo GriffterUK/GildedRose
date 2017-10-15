@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using GildedRose.Strategies;
+
 namespace GildedRose
 {
     public class Inventory : IEquatable<Inventory>
@@ -41,7 +43,7 @@ namespace GildedRose
 
             foreach (Item item in Items)
             {
-                itemUpdateQuantityStrategyFactory.StrategyFor(item.Name).UpdateQuantity(item);
+                itemUpdateQuantityStrategyFactory.StrategyFor(item.Name).Update(item);
             }
         }
 

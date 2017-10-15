@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GildedRose
+namespace GildedRose.Strategies
 {
-    public interface IItemUpdateQuantityStrategy
+    public interface IItemUpdateStrategy
     {
-        void UpdateQuantity(Item item);
+        void Update(Item item);
     } 
 }
