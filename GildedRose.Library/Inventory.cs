@@ -25,7 +25,7 @@ namespace GildedRose
             inventory.AddItem(ItemBuilder.AnItem().WithName("Elixir of the Mongoose").WithSellIn(5).WithQuality(7).Build());
             inventory.AddItem(ItemBuilder.AnItem().WithName("Sulfuras, Hand of Ragnaros").WithSellIn(0).WithQuality(80).Build());
             inventory.AddItem(ItemBuilder.AnItem().WithName("Backstage passes to a TAFKAL80ETC concert").WithSellIn(15).WithQuality(20).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Conjured Mana Cake").WithSellIn(3).WithQuality(6).Build());
+            //inventory.AddItem(ItemBuilder.AnItem().WithName("Conjured Mana Cake").WithSellIn(3).WithQuality(6).Build());
 
             return inventory;
         }
