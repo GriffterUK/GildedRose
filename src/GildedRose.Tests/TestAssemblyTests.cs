@@ -27,9 +27,23 @@ namespace GildedRose.Tests
             InitialiseGoldenMaster();
         }
 
+        public Inventory CreateInitialInventory()
+        {            
+            Inventory inventory = new Inventory(ItemUpdateStrategyFactory.Instance);
+
+            inventory.AddItem(ItemBuilder.AnItem().WithName("+5 Dexterity Vest").WithSellIn(10).WithQuality(20).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Aged Brie").WithSellIn(2).WithQuality(0).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Elixir of the Mongoose").WithSellIn(5).WithQuality(7).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Sulfuras, Hand of Ragnaros").WithSellIn(0).WithQuality(80).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Backstage passes to a TAFKAL80ETC concert").WithSellIn(15).WithQuality(20).Build());
+            inventory.AddItem(ItemBuilder.AnItem().WithName("Conjured Mana Cake").WithSellIn(3).WithQuality(6).Build());
+
+            return inventory;   
+        }
+
         public void InitialiseGoldenMaster()
         { 
-            goldenMasterInventories.Add(Inventory.CreateDefault(ItemUpdateStrategyFactory.Instance));
+            goldenMasterInventories.Add(CreateInitialInventory());
             for (int iterations = 0; iterations < 10; iterations++) {
                 goldenMasterInventories.Add(Inventory.Create(ItemUpdateStrategyFactory.Instance));
             }
@@ -109,8 +123,8 @@ namespace GildedRose.Tests
         [Fact]
         public void MatchGoldenMasterAfterRefactor()
         {
-            Inventory innInventory = Inventory.CreateDefault(ItemUpdateStrategyFactory.Instance);
-            foreach(Inventory thisInventory in goldenMasterInventories)
+            Inventory innInventory = CreateInitialInventory();
+            foreach (Inventory thisInventory in goldenMasterInventories)
             {
                 Assert.True(innInventory.Equals(thisInventory));
                 innInventory.UpdateQuality();
@@ -134,7 +148,7 @@ namespace GildedRose.Tests
             inventory.UpdateQuality();
             Assert.Equal(6, inventory.FindItemByName(itemName).Quality);
 
-            inventory.UpdateQuality();
+            inventory.UpdateQuality(); // should expire now so degrade even quicker again
             Assert.Equal(2, inventory.FindItemByName(itemName).Quality);
 
             inventory.UpdateQuality();

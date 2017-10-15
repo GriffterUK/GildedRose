@@ -28,21 +28,7 @@ namespace GildedRose
         public static Inventory Create(IItemUpdateStrategyFactory itemUpdateStrategyFactory)
         {
             return new Inventory(itemUpdateStrategyFactory);
-        }
-
-        public static Inventory CreateDefault(IItemUpdateStrategyFactory itemUpdateStrategyFactory)
-        {
-            Inventory inventory = new Inventory(itemUpdateStrategyFactory);
-
-            inventory.AddItem(ItemBuilder.AnItem().WithName("+5 Dexterity Vest").WithSellIn(10).WithQuality(20).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Aged Brie").WithSellIn(2).WithQuality(0).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Elixir of the Mongoose").WithSellIn(5).WithQuality(7).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Sulfuras, Hand of Ragnaros").WithSellIn(0).WithQuality(80).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Backstage passes to a TAFKAL80ETC concert").WithSellIn(15).WithQuality(20).Build());
-            inventory.AddItem(ItemBuilder.AnItem().WithName("Conjured Mana Cake").WithSellIn(3).WithQuality(6).Build());
-
-            return inventory;
-        }
+        }      
 
         public void AddItem(Item item)
         {
