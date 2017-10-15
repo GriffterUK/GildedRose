@@ -17,7 +17,8 @@ namespace GildedRose.Strategies
 
         public void Update(Item item)
         {
-
+            // Legendary items do not age, or lose quality
+            // .....so let's do nothing!
         }
     }
 }

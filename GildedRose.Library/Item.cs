@@ -12,11 +12,6 @@ namespace GildedRose
 
         public int SellIn { get; set; }
 
-        public int Quality { get; set; }
-
-        override
-        public string ToString() {
-            return "Item(Name = " + this.Name + ", SellIn = " + this.SellIn + ", Quality = " + this.Quality + ")";
-        }
+        public int Quality { get; set; }       
     }
 }

@@ -72,8 +72,6 @@ namespace GildedRose
         {
             this.item.Quality = Math.Max(qualityLimit, this.item.Quality);
             return this;
-        }
-
-       
+        }       
     }
 }
