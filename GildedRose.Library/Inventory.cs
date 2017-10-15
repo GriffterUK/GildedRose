@@ -50,37 +50,12 @@ namespace GildedRose
         }
 
         public void UpdateQuality()
-        {            
+        {
             foreach (Item item in Items)
             {
                 itemUpdateStrategyFactory.StrategyFor(item.Name).Update(item);
             }
-        }
-
-        public void DisplayItems()
-        {
-            foreach (Item ThisItem in Items)
-            {
-                System.Console.WriteLine(ThisItem.ToString());
-            }
-        }
-
-        public void ReconstructMe()
-        {
-            System.Console.WriteLine("Inventory inventory = new Inventory();");
-            System.Console.WriteLine("");
-
-            foreach (Item ThisItem in Items)
-            {
-                System.Console.WriteLine(String.Format(
-                    "inventory.AddItem(ItemBuilder.AnItem().WithName(\"{0}\").WithSellIn({1}).WithQuality({2}).Build());",
-                    ThisItem.Name, ThisItem.SellIn, ThisItem.Quality));
-            }
-
-            System.Console.WriteLine("");
-            System.Console.WriteLine("");
-
-        }
+        }       
 
         public Item FindItemByName(string name)
         {
