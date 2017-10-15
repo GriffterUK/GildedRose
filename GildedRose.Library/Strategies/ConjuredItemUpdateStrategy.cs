@@ -19,10 +19,8 @@ namespace GildedRose.Strategies
         {
             ItemModifier.Modify(item)
                 .IncreaseAge()
-                .DecreaseQuality()
-                .DecreaseQuality()
-                .DecreaseQualityWhenExpired()
-                .DecreaseQualityWhenExpired()
+                .DecreaseQualityBy(2)               
+                .DecreaseQualityWhenExpiredBy(2)               
                 .LimitQualityToNoLessThan(0);
         }
     }

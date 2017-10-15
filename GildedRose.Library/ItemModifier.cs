@@ -38,15 +38,27 @@ namespace GildedRose
             return this;
         }
 
+        public ItemModifier DecreaseQualityBy(int qualityReduction)
+        {
+            this.item.Quality -= qualityReduction;
+            return this;
+        }
+
         public ItemModifier IncreaseQualityWhenExpiryInLessThan(int sellInLessThan)
         {
-            this.item.Quality+=this.item.SellIn < sellInLessThan ? 1 : 0 ;
+            this.item.Quality += this.item.SellIn < sellInLessThan ? 1 : 0 ;
             return this;
         }
 
         public ItemModifier DecreaseQualityWhenExpired()
         {
             this.item.Quality -= this.item.SellIn < 0 ? 1 : 0;
+            return this;
+        }
+
+        public ItemModifier DecreaseQualityWhenExpiredBy(int qualityReduction)
+        {
+            this.item.Quality -= this.item.SellIn < 0 ? qualityReduction : 0;
             return this;
         }
 
