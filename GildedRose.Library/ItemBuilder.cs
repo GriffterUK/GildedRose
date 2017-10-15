@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose
 {
-    class ItemBuilder
+    public class ItemBuilder
     {
         private Item item = new Item();
 

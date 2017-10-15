@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose
 {
-    public class Inventory
+    public class Inventory : IEquatable<Inventory>
     {
         private IList<Item> items = new List<Item>();  
         public IList<Item> Items {  get { return items;  } }
@@ -127,13 +127,47 @@ namespace GildedRose
             foreach (Item ThisItem in Items)
             {
                 System.Console.WriteLine(String.Format(
-                    "inventory.AddItem(ItemBuilder.AnItem().WithName(\"{0}\").WithSellIn({1}).WithQuality({2}).Build())",
+                    "inventory.AddItem(ItemBuilder.AnItem().WithName(\"{0}\").WithSellIn({1}).WithQuality({2}).Build());",
                     ThisItem.Name, ThisItem.SellIn, ThisItem.Quality));
             }
 
             System.Console.WriteLine("");
             System.Console.WriteLine("");
 
+        }
+
+        public Item FindItemByName(string name)
+        {
+            foreach (Item item in Items)
+            {
+                if ( item.Name.CompareTo(name) == 0 )
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+        
+        public bool Equals(Inventory other)
+        {
+            if ( this.Items.Count == other.Items.Count )
+            {
+                bool isEqual = true;
+                foreach (Item myItem in Items)
+                {
+                    Item otherItem = other.FindItemByName(myItem.Name);
+                    if ( otherItem == null || otherItem.Quality != myItem.Quality || otherItem.SellIn != myItem.SellIn )
+                    {
+                        isEqual = false;
+                        break;
+                    }
+                }
+
+                return isEqual;
+            }
+
+            return false;
         }
     }
 }
