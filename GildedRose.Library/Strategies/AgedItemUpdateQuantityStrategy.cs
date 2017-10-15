@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Strategies
 {
-    class AgedItemUpdateStrategy : IItemUpdateStrategy
+    public class AgedItemUpdateStrategy : IItemUpdateStrategy
     {
         private AgedItemUpdateStrategy() { }
 

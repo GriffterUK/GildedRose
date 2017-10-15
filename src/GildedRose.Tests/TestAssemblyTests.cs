@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Xunit;
 
 using GildedRose;
+using GildedRose.Strategies;
 
 namespace GildedRose.Tests
 {
@@ -10,10 +11,19 @@ namespace GildedRose.Tests
         protected IList<Inventory> iterativeInventories = new List<Inventory>();
 
         public GildedRoseShould()
-        {  
-            iterativeInventories.Add(Inventory.CreateDefault());
+        { 
+            ItemUpdateStrategyFactory.Instance.RegisterStrategyForItemName(AgedItemUpdateStrategy.Create(), 
+                "Aged");
+
+            ItemUpdateStrategyFactory.Instance.RegisterStrategyForItemName(BackstagePassesItemUpdateStrategy.Create(), 
+                "Backstage passes");
+
+            ItemUpdateStrategyFactory.Instance.RegisterStrategyForItemName(LegendaryItemUpdateStrategy.Create(), 
+                "Sulfuras");
+
+            iterativeInventories.Add(Inventory.CreateDefault(ItemUpdateStrategyFactory.Instance));
             for (int iterations = 0; iterations < 10; iterations++) {
-                iterativeInventories.Add(Inventory.Create());
+                iterativeInventories.Add(Inventory.Create(ItemUpdateStrategyFactory.Instance));
             }
 
             iterativeInventories[1].AddItem(ItemBuilder.AnItem().WithName("+5 Dexterity Vest").WithSellIn(9).WithQuality(19).Build());
@@ -91,7 +101,7 @@ namespace GildedRose.Tests
         [Fact]
         public void MatchGoldenMasterAfterRefactor()
         {
-            Inventory innInventory = Inventory.CreateDefault();
+            Inventory innInventory = Inventory.CreateDefault(ItemUpdateStrategyFactory.Instance);
             foreach(Inventory thisInventory in iterativeInventories)
             {
                 Assert.True(innInventory.Equals(thisInventory));

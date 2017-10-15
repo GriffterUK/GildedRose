@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Strategies
 {
-    class BackstagePassesItemUpdateStrategy : IItemUpdateStrategy
+    public class BackstagePassesItemUpdateStrategy : IItemUpdateStrategy
     {
         private BackstagePassesItemUpdateStrategy() { }
 

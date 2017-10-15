@@ -12,15 +12,27 @@ namespace GildedRose
     {
         private IList<Item> items = new List<Item>();  
         public IList<Item> Items {  get { return items;  } }
-            
-        public static Inventory Create()
+
+        private IItemUpdateStrategyFactory itemUpdateStrategyFactory;
+
+        public Inventory(IItemUpdateStrategyFactory itemUpdateStrategyFactory)
         {
-            return new Inventory();
+            if (itemUpdateStrategyFactory == null)
+            {
+                throw new ArgumentNullException("itemUpdateStrategyFactory");
+            }
+
+            this.itemUpdateStrategyFactory = itemUpdateStrategyFactory;
         }
 
-        public static Inventory CreateDefault()
+        public static Inventory Create(IItemUpdateStrategyFactory itemUpdateStrategyFactory)
         {
-            Inventory inventory = new Inventory();
+            return new Inventory(itemUpdateStrategyFactory);
+        }
+
+        public static Inventory CreateDefault(IItemUpdateStrategyFactory itemUpdateStrategyFactory)
+        {
+            Inventory inventory = new Inventory(itemUpdateStrategyFactory);
 
             inventory.AddItem(ItemBuilder.AnItem().WithName("+5 Dexterity Vest").WithSellIn(10).WithQuality(20).Build());
             inventory.AddItem(ItemBuilder.AnItem().WithName("Aged Brie").WithSellIn(2).WithQuality(0).Build());
@@ -38,12 +50,10 @@ namespace GildedRose
         }
 
         public void UpdateQuality()
-        {
-            ItemUpdateQuantityStrategyFactory itemUpdateQuantityStrategyFactory = new ItemUpdateQuantityStrategyFactory();
-
+        {            
             foreach (Item item in Items)
             {
-                itemUpdateQuantityStrategyFactory.StrategyFor(item.Name).Update(item);
+                itemUpdateStrategyFactory.StrategyFor(item.Name).Update(item);
             }
         }
 
