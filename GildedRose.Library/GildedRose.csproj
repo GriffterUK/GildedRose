@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemModifier.cs" />
     <Compile Include="ItemUpdateQuantityStrategyFactory.cs" />
     <Compile Include="IItemUpdateQuantityStrategy.cs" />
     <Compile Include="ItemBuilder.cs" />

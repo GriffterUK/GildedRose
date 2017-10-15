@@ -56,9 +56,11 @@ namespace GildedRose
 
         public void UpdateQuantity(Item item)
         {
-            item.SellIn--;
-            item.Quality += (item.SellIn < 0 ? 2 : 1);
-            item.Quality = Math.Min(50, item.Quality);
+            ItemModifier.Modify(item)
+              .IncreaseAge()
+              .IncreaseQuality()
+              .IncreaseQualityWhenExpired()
+              .LimitQualityTo(50);
         }
     }
 
@@ -88,18 +90,13 @@ namespace GildedRose
 
         public void UpdateQuantity(Item item)
         {
-            item.SellIn--;
-
-            item.Quality++;
-            item.Quality += item.SellIn < 10 ? 1 : 0;
-            item.Quality += item.SellIn < 5 ? 1 : 0;
-
-            if ( item.SellIn < 0 )
-            {
-                item.Quality = 0;
-            }
-
-            item.Quality = Math.Min(50, item.Quality);
+            ItemModifier.Modify(item)
+                .IncreaseAge()
+                .IncreaseQuality()
+                .IncreaseQualityWhenExpiryInLessThan(10)
+                .IncreaseQualityWhenExpiryInLessThan(5)
+                .ReduceAllQualityWhenExpired()
+                .LimitQualityTo(50);
         }  
     }
 
